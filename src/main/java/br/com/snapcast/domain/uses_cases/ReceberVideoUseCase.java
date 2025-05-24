@@ -4,6 +4,8 @@ import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
 import br.com.snapcast.domain.entities.Video;
+import br.com.snapcast.domain.entities.VideoEvento;
+import br.com.snapcast.infrastructure.event.producer.VideoProducer;
 import br.com.snapcast.port.SalvarArquivoPort;
 import br.com.snapcast.shared.exception.ArquivoException;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,12 +19,16 @@ import lombok.extern.java.Log;
 public class ReceberVideoUseCase {
 
     SalvarArquivoPort port;
+    VideoProducer producer;
     private static final int MAX_RETRIES = 2;
     private static final long RETRY_DELAY_MS = 1000;
 
     public void receberVideo(Video video) {
 
-        CompletableFuture.runAsync(() -> salvarArquivoComRetry(video.getCaminhoArquivo()));
+        CompletableFuture.runAsync(() -> {
+            salvarArquivoComRetry(video.getCaminhoArquivo());
+            producer.emitirVideoCriado(new VideoEvento(video));
+        });
 
     }
 

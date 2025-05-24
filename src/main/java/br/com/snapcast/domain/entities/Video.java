@@ -12,10 +12,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 public class Video {
-
     String nome;
     String formatoVideo;
     Long tamanhoArquivo;
     Path caminhoArquivo;
-
 }

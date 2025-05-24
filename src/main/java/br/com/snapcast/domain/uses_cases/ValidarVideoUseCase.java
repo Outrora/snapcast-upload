@@ -1,6 +1,5 @@
 package br.com.snapcast.domain.uses_cases;
 
-import java.util.Optional;
 import java.util.Set;
 
 import br.com.snapcast.shared.exception.ArgumentosInvalidosException;

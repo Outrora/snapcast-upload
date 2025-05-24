@@ -9,6 +9,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import br.com.snapcast.port.ReceberArquivoPort;
 import io.smallrye.common.annotation.RunOnVirtualThread;
+import io.smallrye.common.constraint.NotNull;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -36,7 +37,8 @@ public class EndPointReceberArquivo {
     @RunOnVirtualThread()
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     @Operation(summary = "Realizar upload de vídeo", description = "Realiza o upload de um arquivo de vídeo")
-    public Response uploadVideo(@Parameter(description = "Stream do arquivo de vídeo") InputStream video,
+    public Response uploadVideo(
+            @NotNull() @Parameter(description = "Stream do arquivo de vídeo") InputStream video,
             @Parameter(description = "Nome do arquivo de vídeo") @HeaderParam("nomeArquivo") String nomeArquivo,
             @Parameter(description = "Tamanho do arquivo em bytes") @HeaderParam("Content-Length") long fileSize) {
 
