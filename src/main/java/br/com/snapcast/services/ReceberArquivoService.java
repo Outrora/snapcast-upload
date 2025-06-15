@@ -1,4 +1,4 @@
-package br.com.snapcast.port;
+package br.com.snapcast.services;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -20,16 +20,16 @@ import jakarta.inject.Inject;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 
+// Nao estar seguindo o clean pois nao quero trafegar em classe com objetos muitos grande 
 @RequestScoped
 @AllArgsConstructor(onConstructor = @__(@Inject))
 @Log
-public class ReceberArquivo implements ReceberArquivoPort {
+public class ReceberArquivoService {
 
     Configuracoes config;
     ReceberVideoUseCase useCase;
     ValidarVideoUseCase validarVideoUseCase;
 
-    @Override
     public void receberArquivo(InputStream videoTemp, String nomeArquivo, long tamanho) {
         double tamanhoMB = tamanho / (1024.0 * 1024.0);
         log.info(String.format("📥 Upload iniciado - Arquivo: %s (%.2f MB)",
@@ -39,13 +39,14 @@ public class ReceberArquivo implements ReceberArquivoPort {
 
         var diretorioData = criarDiretorio();
         var extensao = ArquivoUtil.extrairExtensao(nomeArquivo);
-        var nome = UUID.randomUUID().toString() + "." + extensao;
-        var caminhoArquivo = diretorioData.resolve(nome);
+        var id = UUID.randomUUID().toString();
+        var caminhoArquivo = diretorioData.resolve(id + "." + extensao);
 
         try (InputStream in = new BufferedInputStream(videoTemp)) {
             var tamanhoReal = copiarArquivo(in, caminhoArquivo);
             var video = Video.builder()
-                    .nome(nome)
+                    .id(id)
+                    .nome(nomeArquivo)
                     .formatoVideo(extensao)
                     .tamanhoArquivo(tamanhoReal)
                     .caminhoArquivo(caminhoArquivo)

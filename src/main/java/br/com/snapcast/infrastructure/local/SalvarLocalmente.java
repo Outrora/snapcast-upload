@@ -13,7 +13,6 @@ import br.com.snapcast.shared.exception.BaseException;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.java.Log;
 
-@ApplicationScoped
 @Log
 public class SalvarLocalmente implements SalvarArquivoPort {
 
@@ -21,7 +20,7 @@ public class SalvarLocalmente implements SalvarArquivoPort {
     String baseStoragePath;
 
     @Override
-    public void salvarArquivo(Path arquivo) throws BaseException {
+    public String salvarArquivo(Path arquivo, String nome) throws BaseException {
         try {
             Path diretorioDestino = Path.of(baseStoragePath);
             Files.createDirectories(diretorioDestino);
@@ -31,6 +30,7 @@ public class SalvarLocalmente implements SalvarArquivoPort {
             Files.move(arquivo, destino, StandardCopyOption.REPLACE_EXISTING);
 
             log.info("👌 Arquivo movido com sucesso para: " + destino);
+            return destino.toString();
 
         } catch (IOException e) {
             throw new ArquivoException("Erro ao salvar arquivo: ", e);

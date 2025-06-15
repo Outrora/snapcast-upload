@@ -6,6 +6,6 @@ import br.com.snapcast.shared.exception.BaseException;
 
 public interface SalvarArquivoPort {
 
-    void salvarArquivo(Path file) throws BaseException;
+    String salvarArquivo(Path file, String nome) throws BaseException;
 
 }

@@ -7,7 +7,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-import br.com.snapcast.port.ReceberArquivoPort;
+import br.com.snapcast.services.ReceberArquivoService;
 import io.smallrye.common.annotation.RunOnVirtualThread;
 import io.smallrye.common.constraint.NotNull;
 import jakarta.enterprise.context.RequestScoped;
@@ -30,7 +30,7 @@ import lombok.extern.java.Log;
 @Log
 @Tag(name = "Video", description = "Endpoints para gerenciamento de vídeos")
 public class EndPointReceberArquivo {
-    private final ReceberArquivoPort port;
+    private final ReceberArquivoService port;
 
     @POST()
     @Path("upload")
