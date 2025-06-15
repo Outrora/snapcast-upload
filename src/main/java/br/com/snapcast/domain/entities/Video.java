@@ -19,6 +19,6 @@ public class Video {
     Path caminhoArquivo;
 
     public String nomeArquivo() {
-        return nome + "." + formatoVideo;
+        return id + "." + formatoVideo;
     }
 }

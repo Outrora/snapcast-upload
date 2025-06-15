@@ -33,7 +33,13 @@ public class ReceberVideoUseCase {
 
     @Retry(maxRetries = 4)
     public String salvarArquivo(Path caminhoArquivo, Video video) {
-        return port.salvarArquivo(caminhoArquivo, video.nomeArquivo());
+        try {
+            return port.salvarArquivo(caminhoArquivo, video.nomeArquivo());
+        } catch (Exception e) {
+            log.warning(e.getMessage());
+            throw e;
+        }
+
     }
 
 }

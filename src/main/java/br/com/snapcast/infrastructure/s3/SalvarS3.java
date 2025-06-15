@@ -6,10 +6,13 @@ import br.com.snapcast.config.ClienteS3;
 import br.com.snapcast.port.SalvarArquivoPort;
 import br.com.snapcast.shared.exception.BaseException;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @ApplicationScoped
+@AllArgsConstructor(onConstructor = @__(@Inject))
 @Log
 public class SalvarS3 implements SalvarArquivoPort {
 

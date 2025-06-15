@@ -8,11 +8,11 @@ public record VideoEvento(
         String caminhoVideo) {
 
     public VideoEvento(Video video) {
-        this(video.nome, video.nome, video.formatoVideo, video.tamanhoArquivo, video.caminhoArquivo.toString());
+        this(video.id, video.nome, video.formatoVideo, video.tamanhoArquivo, video.caminhoArquivo.toString());
     }
 
     public VideoEvento(Video video, String novoCaminho) {
-        this(video.nome, video.nome, video.formatoVideo, video.tamanhoArquivo, novoCaminho);
+        this(video.id, video.nome, video.formatoVideo, video.tamanhoArquivo, novoCaminho);
     }
 
 }
