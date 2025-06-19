@@ -4,6 +4,7 @@ import java.util.Set;
 
 import br.com.snapcast.shared.exception.ArgumentosInvalidosException;
 import br.com.snapcast.shared.exception.ArquivoException;
+import br.com.snapcast.shared.exception.FormatoInvalidoException;
 import br.com.snapcast.shared.exception.TamanhoMaximoException;
 import br.com.snapcast.shared.utils.ArquivoUtil;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -27,7 +28,7 @@ public class ValidarVideoUseCase {
 
         var extensao = ArquivoUtil.extrairExtensao(nomeArquivo);
         if (!ALLOWED_EXTENSIONS.contains(extensao.toLowerCase())) {
-            throw new ArquivoException("Extensão de arquivo não permitida: " + extensao);
+            throw new FormatoInvalidoException(extensao);
         }
     }
 

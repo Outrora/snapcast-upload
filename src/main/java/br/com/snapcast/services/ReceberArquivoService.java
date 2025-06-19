@@ -26,9 +26,9 @@ import lombok.extern.java.Log;
 @Log
 public class ReceberArquivoService {
 
-    Configuracoes config;
-    ReceberVideoUseCase useCase;
-    ValidarVideoUseCase validarVideoUseCase;
+    private Configuracoes config;
+    private ReceberVideoUseCase useCase;
+    private ValidarVideoUseCase validarVideoUseCase;
 
     public void receberArquivo(InputStream videoTemp, String nomeArquivo, long tamanho) {
         double tamanhoMB = tamanho / (1024.0 * 1024.0);
