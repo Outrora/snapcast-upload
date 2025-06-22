@@ -17,6 +17,7 @@ public class Video {
     String formatoVideo;
     Long tamanhoArquivo;
     Path caminhoArquivo;
+    String idUsuario;
 
     public String nomeArquivo() {
         return id + "." + formatoVideo;

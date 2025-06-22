@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.InputStream;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -25,12 +26,15 @@ class EndPointReceberArquivoTest {
     @Mock
     ReceberArquivoService port;
 
+    @Mock
+    JsonWebToken jtw;
+
     EndPointReceberArquivo endPoint;
 
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
-        endPoint = new EndPointReceberArquivo(port);
+        endPoint = new EndPointReceberArquivo(port, jtw);
     }
 
     @Test
@@ -39,12 +43,14 @@ class EndPointReceberArquivoTest {
         InputStream is = getClass().getResourceAsStream("/test-video.mp4");
         String nome = "test-video.mp4";
         Long tamanho = 23854558L;
+        String id = "id_cliente";
 
-        doNothing().when(port).receberArquivo(any(), anyString(), anyLong());
+        when(jtw.getClaim(anyString())).thenReturn(id);
+        doNothing().when(port).receberArquivo(any(), anyString(), anyLong(), anyString());
 
         var reposta = endPoint.uploadVideo(is, nome, tamanho);
 
-        verify(port, times(1)).receberArquivo(is, nome, tamanho);
+        verify(port, times(1)).receberArquivo(is, nome, tamanho, id);
 
         assertThat(reposta.getStatus()).isEqualTo(Status.ACCEPTED.getStatusCode());
         assertThat(reposta.getEntity()).isInstanceOf(MensagemResposta.class);

@@ -30,12 +30,13 @@ public class ReceberArquivoService {
     private ReceberVideoUseCase useCase;
     private ValidarVideoUseCase validarVideoUseCase;
 
-    public void receberArquivo(InputStream videoTemp, String nomeArquivo, long tamanho) {
+    public void receberArquivo(InputStream videoTemp, String nomeArquivo, long tamanho, String idUsuario) {
         double tamanhoMB = tamanho / (1024.0 * 1024.0);
         log.info(String.format("📥 Upload iniciado - Arquivo: %s (%.2f MB)",
                 nomeArquivo,
                 tamanhoMB));
         validarVideoUseCase.validarVideo(nomeArquivo, tamanho);
+        log.info(idUsuario);
 
         var diretorioData = criarDiretorio();
         var extensao = ArquivoUtil.extrairExtensao(nomeArquivo);
@@ -50,6 +51,7 @@ public class ReceberArquivoService {
                     .formatoVideo(extensao)
                     .tamanhoArquivo(tamanhoReal)
                     .caminhoArquivo(caminhoArquivo)
+                    .idUsuario(idUsuario)
                     .build();
             useCase.receberVideo(video);
 

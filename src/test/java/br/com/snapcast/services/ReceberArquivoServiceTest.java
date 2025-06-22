@@ -52,13 +52,14 @@ public class ReceberArquivoServiceTest {
         InputStream is = getClass().getResourceAsStream("/test-video.mp4");
         String nome = "test-video.mp4";
         Long tamanho = 23854558L;
+        String id = "Cliente_ID";
 
         doNothing().when(useCase).receberVideo(any());
         doNothing().when(validarVideoUseCase).validarVideo(anyString(), anyLong());
 
         when(config.getDiretorioVideos()).thenReturn(localTemporario.toString());
         when(config.getBufferSize()).thenReturn(8192);
-        service.receberArquivo(is, nome, tamanho);
+        service.receberArquivo(is, nome, tamanho, id);
 
         assertThatNoException();
 
