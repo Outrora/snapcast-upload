@@ -43,7 +43,7 @@ jobs:
               with:
                 push: true
                 tags: |
-                    mrpauloii/snapcast-processamento:latest
+                    mrpauloii/snapcast-upload:latest
                 context: .
             
 
