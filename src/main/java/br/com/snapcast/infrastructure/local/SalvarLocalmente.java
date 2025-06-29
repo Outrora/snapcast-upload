@@ -10,9 +10,11 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import br.com.snapcast.port.SalvarArquivoPort;
 import br.com.snapcast.shared.exception.ArquivoException;
 import br.com.snapcast.shared.exception.BaseException;
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.annotation.Generated;
 import lombok.extern.java.Log;
 
+//Classe usada Somente para teste Local
+@Generated("SalvarLocalmente")
 @Log
 public class SalvarLocalmente implements SalvarArquivoPort {
 

@@ -15,8 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 
 @ApplicationScoped
-@AllArgsConstructor(onConstructor = @__(@Inject))
 @Log
+@AllArgsConstructor(onConstructor = @__(@Inject))
 public class ReceberVideoUseCase {
 
     SalvarArquivoPort port;

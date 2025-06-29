@@ -4,10 +4,7 @@ import java.util.Optional;
 
 import br.com.snapcast.shared.exception.ArquivoException;
 
-public final class ArquivoUtil {
-
-    private ArquivoUtil() {
-    }
+public interface ArquivoUtil {
 
     public static String extrairExtensao(String nomeArquivo) {
         return Optional.ofNullable(nomeArquivo)
